@@ -40,3 +40,31 @@
     </div>
   </div>
 </form>
+<br>
+<h6>Todos List:</h6>
+<div *ngIf="(todos | async )?.length!=0">
+  <table class="table">
+    <thead class="thead-inverse">
+      <tr>
+        <th>#</th>
+        <th>Todo Description</th>
+        <th>Responsible</th>
+        <th>Priority</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let t of todos | async">
+        <td><span>{{ t.id }}</span></td>
+        <td><span>{{ t.description }}</span></td>
+        <td><span>{{ t.responsible }}</span></td>
+        <td>
+          <span *ngIf="t.priority=='low'" class="badge badge-success">Low</span>
+          <span *ngIf="t.priority=='medium'" class="badge badge-warning">Medium</span>
+          <span *ngIf="t.priority=='high'" class="badge badge-danger">High</span>
+        </td>
+        <td><button class="btn btn-primary" (click)="removeTodo(t)">Delete</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
